@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div class='home'>
+    <div>内容：{{msg}}</div>
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+<script lang='ts'>
+import { ref } from 'vue'
+import useCount from '@/views/useCount'
 
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class Home extends Vue {}
+export default {
+  name: 'CountDemo',
+  setup() {
+    const { current: count, inc, dec, set, reset } = useCount(2, {
+      min: 1,
+      max: 15
+    })
+    const msg = ref('Demo useCount')
+
+    return {
+      count,
+      inc,
+      dec,
+      set,
+      reset,
+      msg
+    }
+  }
+}
 </script>
